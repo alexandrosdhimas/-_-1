@@ -1,36 +1,40 @@
 #include<iostream>
 using namespace std;
 
-#define N 6
+#define N 5
 
 class grid{
     public:
         grid();
         ~grid() {};
-        char get_position(int in_x,int in_y);
+        void set_cell(int in_x,int in_y);
         void print_grid();
     private:
         char p[N][N];    
 };
 
-class coordinates{
-    public:
-        coordinates();
-        coordinates(int in_x, int in_y);
-        ~coordinates() {};
-        void set_coordinates(int in_x, int in_y);
-        int get_x();
-        int get_y();
-    private:
-        int x;
-        int y;
-};
+{
+// class coordinates{
+//     public:
+//         coordinates();
+//         coordinates(int in_x, int in_y);
+//         ~coordinates() {};
+//         void set_coordinates(int in_x, int in_y);
+//         int get_x();
+//         int get_y();
+//     private:
+//         int x;
+//         int y;
+// };
+}
 
 class vehicle{
     public:
         vehicle();
         vehicle(int in_x, int in_y);
         ~vehicle() {};
+        int get_x() const;
+        int get_y() const;
         void move_up();
         void move_down();
         void move_right();
@@ -67,10 +71,16 @@ int main()
 
     vehicle v;
     v.print_position(g);
-    g.print_grid();
+    v.move_up();
+    v.print_position(g);
     v.move_left();
     v.print_position(g);
-    g.print_grid();
+    v.move_left();
+    v.print_position(g);
+    v.move_down();
+    v.print_position(g);
+    v.move_right();
+    v.print_position(g);
 
     return 0;
 }
@@ -96,52 +106,54 @@ void grid::print_grid()
     cout<<endl;
 }
 
-void grid::get_position(int in_x, int in_y)
+void grid::set_cell(int in_x, int in_y)
 {
-    x = in_x;
-    y = in_y;
+    int x = in_x;
+    int y = in_y;
 
-    return p[x][y];
+    p[y-1][x-1] = 'V';
 }
 
-coordinates::coordinates()
 {
-    x = 0;
-    y = 0;
-}
+// coordinates::coordinates()
+// {
+//     x = 0;
+//     y = 0;
+// }
 
-coordinates::coordinates(int in_x, int in_y)
-{
-    x = in_x;
-    y = in_y;
-}
+// coordinates::coordinates(int in_x, int in_y)
+// {
+//     x = in_x;
+//     y = in_y;
+// }
 
-void coordinates::set_coordinates(int in_x, int in_y)
-{
-    x = in_x;
-    y = in_y;
-}
+// void coordinates::set_coordinates(int in_x, int in_y)
+// {
+//     x = in_x;
+//     y = in_y;
+// }
 
-int coordinates::get_x()
-{
-    return x;
-}
+// int coordinates::get_x()
+// {
+//     return x;
+// }
 
-int coordinates::get_y()
-{
-    return y;
+// int coordinates::get_y()
+// {
+//     return y;
+// }
 }
 
 vehicle::vehicle()
 {
     x = 4;
-    y = 3;
+    y = 5;
 }
 
 vehicle::vehicle(int in_x, int in_y)
 {
-    x = in_x;
-    y = in_y;
+    x = in_x-1;
+    y = in_y-1;
 }
 
 void vehicle::move_up()
@@ -166,7 +178,18 @@ void vehicle::move_left()
 
 void vehicle::print_position(grid &ob)
 {
-    ob.get_position[x][y] = 'V';
+    ob.set_cell(x,y);
+    ob.print_grid();
+}
+
+int vehicle::get_x() const
+{
+    return x;
+}
+
+int vehicle::get_y() const
+{
+    return y;
 }
 
 obstacle::obstacle()

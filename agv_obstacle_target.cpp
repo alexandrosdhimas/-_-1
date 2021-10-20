@@ -13,7 +13,6 @@ class grid{
         char p[N][N];    
 };
 
-{
 // class coordinates{
 //     public:
 //         coordinates();
@@ -26,7 +25,6 @@ class grid{
 //         int x;
 //         int y;
 // };
-}
 
 class vehicle{
     public:
@@ -114,7 +112,6 @@ void grid::set_cell(int in_x, int in_y)
     p[y-1][x-1] = 'V';
 }
 
-{
 // coordinates::coordinates()
 // {
 //     x = 0;
@@ -142,7 +139,6 @@ void grid::set_cell(int in_x, int in_y)
 // {
 //     return y;
 // }
-}
 
 vehicle::vehicle()
 {
@@ -152,8 +148,8 @@ vehicle::vehicle()
 
 vehicle::vehicle(int in_x, int in_y)
 {
-    x = in_x-1;
-    y = in_y-1;
+    x = in_x;
+    y = in_y;
 }
 
 void vehicle::move_up()

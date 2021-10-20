@@ -7,9 +7,7 @@ class grid{
     public:
         grid();
         ~grid() {};
-        friend class vehicle;
-        friend class obstacle;
-        friend class target;
+        char get_position(int in_x,int in_y);
         void print_grid();
     private:
         char p[N][N];    
@@ -31,7 +29,7 @@ class coordinates{
 class vehicle{
     public:
         vehicle();
-        vehicle(coordinates in_position);
+        vehicle(int in_x, int in_y);
         ~vehicle() {};
         void move_up();
         void move_down();
@@ -39,7 +37,8 @@ class vehicle{
         void move_left();
         void print_position(grid &ob);
     private:
-        coordinates position;
+        int x;
+        int y;
 };
 
 class obstacle{
@@ -48,7 +47,8 @@ class obstacle{
         ~obstacle() {};
         // void move();
     private:
-        coordinates position;
+        int x;
+        int y;
 };
 
 class target{
@@ -56,7 +56,8 @@ class target{
         target();
         ~target() {};
     private:
-        coordinates position;
+        int x;
+        int y;
 };
 
 int main()
@@ -95,6 +96,14 @@ void grid::print_grid()
     cout<<endl;
 }
 
+void grid::get_position(int in_x, int in_y)
+{
+    x = in_x;
+    y = in_y;
+
+    return p[x][y];
+}
+
 coordinates::coordinates()
 {
     x = 0;
@@ -125,52 +134,49 @@ int coordinates::get_y()
 
 vehicle::vehicle()
 {
-    coordinates vehicle_initial_position(4,3);
-    position = vehicle_initial_position;
+    x = 4;
+    y = 3;
 }
 
-vehicle::vehicle(coordinates in_position)
+vehicle::vehicle(int in_x, int in_y)
 {
-    position = in_position;
+    x = in_x;
+    y = in_y;
 }
 
 void vehicle::move_up()
 {
-    int x = position.get_x();
-    int y = position.get_y();
-    position.set_coordinates(x, y-1);
+    y--;
 }
+
 void vehicle::move_down()
 {
-    int x = position.get_x();
-    int y = position.get_y();
-    position.set_coordinates(x, y+1);
+    y++;
 }
+
 void vehicle::move_right()
 {
-    int x = position.get_x();
-    int y = position.get_y();
-    position.set_coordinates(x+1, y);
+    x++;
 }
+
 void vehicle::move_left()
 {
-    int x = position.get_x();
-    int y = position.get_y();
-    position.set_coordinates(x-1, y);
+    x--;
 }
+
 void vehicle::print_position(grid &ob)
 {
-    ob.p[position.get_x()][position.get_y()] = 'V';
+    ob.get_position[x][y] = 'V';
 }
 
 obstacle::obstacle()
 {
-    coordinates obstacle_initial_position(2,1);
-    position = obstacle_initial_position;
+    x = 2;
+    y = 1;
 }
 
 target::target()
 {
-    coordinates target_initial_position(2,1);
-    position = target_initial_position;
+    x = 1;
+    y = 3;
 }

@@ -1,1 +1,1 @@
-# -_-1
+# Artifitial Intelligence Course MEAD
